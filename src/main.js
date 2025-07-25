@@ -1,7 +1,8 @@
 let _isStart = true;         // 音声認識を開始したかどうか
 let _port = 5596;
-let _langMode = "Japanese";  // 音声認識の言語モード
+let _langMode = "ja-JP";  // 音声認識の言語モード
 let _infoMode = "simple"     // 接続されたサーバーの音声認識モード
+let _recognition = null;
 
 const startASR = document.getElementById("start");
 startASR.addEventListener("click", () => {         // startボタンを押されたときに呼ばれるイベントを設定
@@ -28,15 +29,18 @@ function StartWebSocketServer () { // WebSocketサーバーを立てるメソッ
 }
 
 function StartASR () { // 音声認識開始メソッド
-    const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-    const recognition = new SpeechRecognition(); // 音声認識インスタンスを作成
-    recognition.interimResults =true;
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    _recognition = new SpeechRecognition();           // 音声認識インスタンスを作成
+    _recognition.lang = _langMode;                    // 言語モードを指定
+    _recognition.interimResults =true;                // 音声認識の中間結果を取得するように設定
+    _recognition.continuous = true;                   // 音声認識を継続的に行うように設定
 
-    recognition.onresult = async function (event) {  // 音声認識結果を受け取った際の処理
-        console.log(event.results[0][0].transcript);
+    _recognition.onresult = async function (event) {  // 音声認識結果を受け取った際の処理
+        const index = event.results.length - 1;       // 最後の結果のインデックス
+        console.log(`${event.results[index].isFinal} ${event.results[index].confidence}  ${event.results[index][0].transcript}`);
     }
 
-    recognition.start(); // 音声認識を開始
+    _recognition.start(); // 音声認識を開始
 }
 
 function StopASR () {  // 音声認識終了メソッド
@@ -46,8 +50,9 @@ function StopASR () {  // 音声認識終了メソッド
     console.log("音声認識開始ボタンを利用可能に設定");
 } 
 
-function GetVolumePressure () { // 音圧取得メソッド
-
+function StartVolumeMeter () { // 音圧取得メソッド
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    
 }
 
 
