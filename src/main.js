@@ -1,15 +1,26 @@
 let _isStart = true;         // 音声認識を開始したかどうか
-let _lengMode = "Japanese";  // 音声認識の言語モード
+let _port = 5596;
+let _langMode = "Japanese";  // 音声認識の言語モード
 let _infoMode = "simple"     // 接続されたサーバーの音声認識モード
 
-const startEventTriggered = document.getElementById("start");
-startEventTriggered.addEventListener("click", () => {         // startボタンを押されたときに呼ばれるイベントを設定
+const startASR = document.getElementById("start");
+startASR.addEventListener("click", () => {         // startボタンを押されたときに呼ばれるイベントを設定
     ASRManager();
+})
+
+const stopASR = document.getElementById("stop");
+stopASR.disabled = "disabled";
+stopASR.addEventListener("click", () => {
+    StopASR();
 })
 
 function ASRManager () {        // 開始ボタンを押したときに呼ばれるメソッド
     StartASR();          // 音声認識を開始
-    GetVolumePressure(); // 音圧取得を開始
+    // GetVolumePressure(); // 音圧取得を開始
+    startASR.disabled = "disabled";
+    console.log("音声認識開始ボタンを利用不可に設定");
+    stopASR.disabled = null;
+    console.log("音声認識停止ボタンを利用可能に設定");
 }
 
 function StartWebSocketServer () { // WebSocketサーバーを立てるメソッド
@@ -17,19 +28,22 @@ function StartWebSocketServer () { // WebSocketサーバーを立てるメソッ
 }
 
 function StartASR () { // 音声認識開始メソッド
-    speechRecognition = webkitSpeechRecognition || SpeechRecognition;
-    const recognition = new speechRecognition();
-    recognition.continuous = true;
+    const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    const recognition = new SpeechRecognition(); // 音声認識インスタンスを作成
+    recognition.interimResults =true;
 
-    var asrContent = document.getElementById("asrContentResult");
-
-    while(true){ // 音声認識をループ
-
+    recognition.onresult = async function (event) {  // 音声認識結果を受け取った際の処理
+        console.log(event.results[0][0].transcript);
     }
+
+    recognition.start(); // 音声認識を開始
 }
 
 function StopASR () {  // 音声認識終了メソッド
-
+    stopASR.disabled = "disabled";
+    console.log("音声認識停止ボタンを利用不可に設定");
+    startASR.disabled = null;
+    console.log("音声認識開始ボタンを利用可能に設定");
 } 
 
 function GetVolumePressure () { // 音圧取得メソッド
