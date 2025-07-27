@@ -1,2 +1,97 @@
 @charset "utf-8";
 
+body {
+    background-color: #2c3e50;
+    margin: 40px;
+    font-family: sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.top, .bottom {
+    display: flex;
+    gap: 20px;
+}
+
+.itemBox {
+    background-color: #b0b0b0;
+    padding: 10px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+
+#volumeBox {
+    width: 150px;
+    height: 250px;
+}
+
+#asrBox {
+    flex: 1;
+    height: 250px;
+}
+
+#managerBox {
+    width: 400px;
+    height: 320px;
+}
+
+#managerTitle {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+#asrManager,
+#volumePressureManager, 
+#webSocketServerManager {
+    border: 2px solid black;
+    height: 80px;
+    width: 90%;
+    margin: 2% auto;
+    background-color: #bab2b2;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#asrManagerTitle, 
+#volumePressureManagerTitle, 
+#webSocketServerManagerTitle {
+    font-weight: bold;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
+
+#asrManager button,
+#volumePressureManager button,
+#webSocketServerManager button {
+    flex: 1;
+    padding: 5px 10px;
+}
+
+#logBox {
+    flex: 1;
+    height: 320px;
+}
+
+#logTitle {
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 6px;
+}
+
+#logHistory{
+    border: 2px solid black;
+    height: 275px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 14px;
+    background-color: #bcb5b5;
+}

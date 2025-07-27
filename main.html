@@ -6,10 +6,48 @@
     <script src="src/main.js" async></script>
 </head>
 <body>
-    <div id="main">
-        <div id="title"></div>
-        <div id="asrContentResult"></div>
-        <button id="start">Start</button>
-        <button id="stop">Stop</button>
+    <div class="container">
+        <div class="top">
+            <div id="volumeBox" class="itemBox">
+                <div id="volumePressureTitle">Volume Pressure</div>
+                
+            </div>
+            <div id="asrBox" class="itemBox">
+                <div id="asrTitle">ASR(Automatic Speech Recognition)</div>
+                <div id="asrTop">
+                    <div id="asrConfidence"></div>
+                    <div id="asrCondition"></div>
+                </div>
+                <div id="asrButtom">
+                    <div id="asrResult"></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div id="managerBox" class="itemBox">
+                <div id="managerTitle">Manager</div>
+                <div id="asrManager">
+                    <div id="asrManagerTitle">ASR</div>
+                    <button id="startASR">Start</button>
+                    <button id="stopASR">Stop</button>
+                </div>
+                <div id="volumePressureManager">
+                    <div id="volumePressureManagerTitle">Volume Pressure</div>
+                    <button id="startVolumePressure">Start</button>
+                    <button id="stopVolumePressure">Stop</button>
+                </div>
+                <div id="webSocketServerManager">
+                    <div id="webSocketServerManagerTitle">WebSocketServer</div>
+                    <div id="hostURLBoxTitle">HostURL</div>
+                    <textarea id="hostURLBox"></textarea>
+                    <button id="startWebSocketServer">Start</button>
+                    <button id="stopWebSocketServer">Stop</button>
+                </div>
+            </div>
+            <div id="logBox" class="itemBox">
+                <div id="logTitle">Log</div>
+                <div id="logHistory"></div>
+            </div>
+        </div>
     </div>
 </body>
