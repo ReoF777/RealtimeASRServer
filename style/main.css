@@ -4,17 +4,30 @@ body {
     background-color: #2c3e50;
     margin: 20px;
     font-family: sans-serif;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 100%;
+    box-sizing: border-box;
 }
 
-.top, .bottom {
+.top {
     display: flex;
     gap: 10px;
+    flex: 1;
+}
+
+.bottom {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+    padding-bottom: 4%;
 }
 
 .itemBox {
@@ -22,21 +35,137 @@ body {
     padding: 10px;
     border: 1px solid #000;
     box-sizing: border-box;
+    height: 100%;
 }
 
 #volumeBox {
-    width: 150px;
-    height: 250px;
+    width: 30%;
 }
 
 #asrBox {
-    flex: 1;
-    height: 250px;
+    width: 70%;
 }
 
 #managerBox {
-    width: 400px;
-    height: 390px;
+    width: 40%;
+}
+
+#logBox {
+    width: 60%;
+}
+
+#volumePressureTitle {
+    text-align: center;
+    font-weight: bold;
+}
+
+#volumePressureImage {
+    height: 70%;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+#micIcon{
+    height: 70%;
+    margin-left: 15%;
+}
+
+#volumeBarContainer {
+    width: 10%;
+    height: 90%;
+    background-color: #ddd;
+    border: 1px solid #333;
+    display: flex;
+    align-items: flex-end;
+}
+
+#volumeBar {
+    width: 100%;
+    height: 0%;
+    background-color: limegreen;
+    transition: height 0.3s ease;
+}
+
+#volumePressureValue {
+    height: 30%;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+
+#asrTitle {
+    text-align: center;
+    font-weight: bold;
+}
+
+#asrTop {
+    display: flex;
+    height: 40%;
+    margin-top: 7%;
+    gap: 10px;
+}
+
+#asrConfidence {
+    width: 60%;
+    height: 50%;
+    border: 2px solid black;
+    display: flex;
+}
+
+#asrConfidenceTitle {
+    width: 30%;
+    margin-top: 5.5%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#asrConfidenceValue {
+    width: 70%;
+    margin-top: 5.5%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#asrCondition {
+    width: 40%;
+    height: 50%;
+    border: 2px solid black;
+    display: flex;
+}
+
+#asrConditionTitle {
+    width: 30%;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 8%;
+}
+
+#asrConditionValue {
+    width: 70%;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 8%;
+}
+
+#asrButtom {
+    height: 60%;
+}
+
+#asrResult {
+    height: 70%;
+    width: 70%;
+    margin-top: -5%;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 2px solid black;
+    text-align: center;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #managerTitle {
@@ -70,7 +199,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     gap: 10px;
-    margin-left: 20px;
+    margin-left: 10%;
 }
 
 #hostURLBoxTitle {
@@ -80,7 +209,7 @@ body {
 }
 
 #hostURLBox {
-    width: 40%;
+    width: 60%;
     height: 20px;
     resize: none;
 }
@@ -105,24 +234,20 @@ body {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-#logBox {
-    flex: 1;
-    height: 390px;
-}
 
 #logTitle {
     text-align: center;
-    margin-top: -5px;
-    margin-bottom: 6px;
+    margin-top: -1%;
+    margin-bottom: 1%;
+    font-weight: bold;
 }
 
 #logHistory{
-    border: 2px solid black;
-    height: 340px;
+    border: 1px solid black;
+    height: 93%;
     width: 100%;
     box-sizing: border-box;
-    padding: 10px;
     overflow-y: auto;
     font-size: 14px;
-    background-color: #bcb5b5;
+    background-color: #a8a2a2;
 }

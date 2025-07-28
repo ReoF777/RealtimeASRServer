@@ -10,13 +10,25 @@
         <div class="top">
             <div id="volumeBox" class="itemBox">
                 <div id="volumePressureTitle">Volume Pressure</div>
-                
+                <div id="volumePressureImage">
+                    <img id="micIcon" src="config/micIcon.png" alt="Mic Icon">
+                    <div id="volumeBarContainer">
+                        <div id="volumeBar"></div>
+                    </div>
+                </div>
+            <div id="volumePressureValue">0DB</div>
             </div>
             <div id="asrBox" class="itemBox">
                 <div id="asrTitle">ASR(Automatic Speech Recognition)</div>
                 <div id="asrTop">
-                    <div id="asrConfidence"></div>
-                    <div id="asrCondition"></div>
+                    <div id="asrConfidence">
+                        <div id="asrConfidenceTitle">Confidence</div>
+                        <div id="asrConfidenceValue"></div>
+                    </div>
+                    <div id="asrCondition">
+                        <div id="asrConditionTitle">Condition</div>
+                        <div id="asrConditionValue"></div>
+                    </div>
                 </div>
                 <div id="asrButtom">
                     <div id="asrResult"></div>
