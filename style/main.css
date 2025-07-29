@@ -97,11 +97,11 @@ body {
     background-color: rgb(159, 168, 177);
     cursor: ns-resize;
     user-select: none;
-    top: 50%;
+    bottom: 0%;
 }
 
 #volumePressureValue {
-    height: 30%;
+    height: 0%;
     text-align: center;
     font-weight: bold;
     font-size: larger;
@@ -115,8 +115,8 @@ body {
 #asrTop {
     display: flex;
     height: 40%;
-    margin-top: 7%;
-    gap: 10px;
+    margin-top: 2%;
+    gap: 3%;
 }
 
 #asrConfidence {
@@ -128,14 +128,14 @@ body {
 
 #asrConfidenceTitle {
     width: 30%;
-    margin-top: 5.5%;
+    margin-top: 1%;
     text-align: center;
     font-weight: bold;
 }
 
 #asrConfidenceValue {
     width: 70%;
-    margin-top: 5.5%;
+    margin-top: 1%;
     text-align: center;
     font-weight: bold;
 }
@@ -151,14 +151,14 @@ body {
     width: 30%;
     text-align: center;
     font-weight: bold;
-    margin-top: 8%;
+    margin-top: 1%;
 }
 
 #asrConditionValue {
     width: 70%;
     text-align: center;
     font-weight: bold;
-    margin-top: 8%;
+    margin-top: 1%;
 }
 
 #asrButtom {
@@ -168,7 +168,7 @@ body {
 #asrResult {
     height: 70%;
     width: 70%;
-    margin-top: -5%;
+    margin-top: -1.5%;
     margin-left: 15%;
     margin-right: 15%;
     border: 2px solid black;
@@ -226,7 +226,7 @@ body {
     resize: none;
     text-align: center;
     font-weight: bold;
-    font-size: large;
+    font-size: 17px;
     font-family:Arial, Helvetica, sans-serif
 }
 
@@ -236,14 +236,14 @@ body {
     gap: 10px;
 }
 
-#startASR, #stopASR,
-#startVolumePressure, #stopVolumePressure,
-#startWebSocketServer, #stopWebSocketServer {
-    height: 28px;
-    width: 58px;
+#startASR, 
+#startVolumePressure, 
+#startWebSocketServer {
+    height: 25px;
+    width: 20%;
     border: none;
     border-radius: 6px;
-    background-color: #3498db;
+    background-color: #8ea7b7;
     color: white;
     font-weight: bold;
     cursor: pointer;
