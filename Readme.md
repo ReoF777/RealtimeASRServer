@@ -1,7 +1,7 @@
 # Realtime ASR Server App
 
 <p align="center">
-  <img src="./images/overview.png" alt="ソフトウェアの概観" width="450" />
+  <img src="./images/overview.png" alt="ソフトウェアの概観" width="500" />
 </p>
 
 
