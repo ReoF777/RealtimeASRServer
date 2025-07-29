@@ -10,13 +10,14 @@ let _setThresholdValue = 0;    // 閾値(音圧)の閾値(最初はすべての�
 let _volumnHistory = [];       // 音圧履歴
 let _volumnTimestamp = performance.now();
 let VOLUMN_RECORD_SPAN = 100;  // 音圧履歴に入れるデータの時間間隔(ms)
-let VOLUMN_HISTORY_LEN = 3000;        // 音圧履歴から参照する時間幅(ミリセカンド)
-let VOLUMN_CUTOFF = 3000;     // 音圧履歴に入れる最大時間幅(3000の場合だと、三秒前のデータまで保存、それ以外は削除)
+let VOLUMN_HISTORY_LEN = 3000; // 音圧履歴から参照する時間幅(ミリセカンド)
+let VOLUMN_CUTOFF = 3000;      // 音圧履歴に入れる最大時間幅(3000の場合だと、三秒前のデータまで保存、それ以外は削除)
 let _webSocket = null;
+let _prevIsFinal = false;      // 前の認識結果が、認識完了結果の場合
 
 const startASR = document.getElementById("startASR");
 startASR.addEventListener("click", () => {         // startボタンを押されたときに呼ばれるイベントを設定
-    ASRManager();
+    StartASR();
 })
 
 const startVolumeMeter = document.getElementById("startVolumePressure");
@@ -56,17 +57,12 @@ document.addEventListener("mouseup", () => {
     _isDragging = false;
 });
 
-function ASRManager () {        // 開始ボタンを押したときに呼ばれるメソッド
-    StartASR();          // 音声認識を開始
-    startASR.disabled = "disabled";
-    console.log("音声認識開始ボタンを利用不可に設定");
-}
-
 function StartWebSocketClient () { // WebSocketクライアントを立てるメソッド
     let hostURLText = document.getElementById("hostURL").value;
     _webSocket = new WebSocket(hostURLText);
 
     _webSocket.onopen = function(e){
+        startWebSocketServer.disabled = "disabled";
         LogMessage("WebSocketサーバーを立ち上げました。");
     }
 
@@ -82,6 +78,7 @@ function StartWebSocketClient () { // WebSocketクライアントを立てるメ
     _webSocket.onclose = function(){
         _webSocket = null;
         LogMessage("WebSocketサーバーが閉じました");
+        startWebSocketServer.disabled = null;
     }
 }
 
@@ -90,6 +87,9 @@ function StartASR () { // 音声認識開始メソッド
         alert("WebSocketサーバーを立ち上げてください");
         return;
     }
+
+    startASR.disabled = "disabled";
+    console.log("音声認識開始ボタンを利用不可に設定");
 
     asrResultText = document.getElementById("asrResult");
     asrConfidenceText = document.getElementById("asrConfidenceValue");
@@ -105,6 +105,11 @@ function StartASR () { // 音声認識開始メソッド
     }
 
     _recognition.onresult = async function (event) {  // 音声認識結果を受け取った際の処理
+        if(_prevIsFinal == true){    // 前回の認識結果が、認識完了データの場合
+            _prevIsFinal = false;    // 認識フラグを初期化
+            asrResultText.textContent = ""; // 音声認識結果を初期化
+        }
+
         const now = performance.now();     // 現在時刻を取得
         const recentVolumes = _volumnHistory.filter(v => now - v.time <= VOLUMN_HISTORY_LEN); // 参照する時間幅分、データを取得(ms単位)
         let maxVolume = 0;                 // 最大音圧
@@ -121,11 +126,13 @@ function StartASR () { // 音声認識開始メソッド
         const index = event.results.length - 1;       // 最後の結果のインデックス
         console.log(`${event.results[index].isFinal} ${event.results[index][0].confidence}  ${event.results[index][0].transcript}`);
         
-        // if(prevResult.length > event.result[index][0].transcript.length){
-        //     asrResultText.textContent = event.results[index][0].transcript;
-        // }
+        if(event.results[index].isFinal || event.results[index][0].transcript.length > prevResult.length){
+            asrResultText.textContent = event.results[index][0].transcript;
+        }
 
-        asrResultText.textContent = event.results[index][0].transcript;
+        _prevIsFinal = event.results[index].isFinal;
+
+        // asrResultText.textContent = event.results[index][0].transcript;
         asrConfidenceText.textContent = `${event.results[index][0].confidence}`;
         asrConditionText.textContent = `${event.results[index].isFinal}`;
 
@@ -153,6 +160,7 @@ async function StartVolumeMeter () { // 音圧取得メソッド
         return;
     }
 
+    startVolumeMeter.disabled = "disabled";
     if(_audioContext){
         return;
     }
