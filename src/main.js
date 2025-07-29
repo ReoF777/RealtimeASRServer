@@ -49,7 +49,7 @@ document.addEventListener("mousemove", (e) => {
     const percent = ((offsetY / containerRect.height) * 100 - 100) * -1;
     thresholdLine.style.top = `${(percent - 100) * -1}%`;
 
-    volumeText.textContent = `${percent}%`;
+    volumeText.textContent = `${Math.round(percent)}%`;
     _setThresholdValue = percent;
 });
 
@@ -87,6 +87,8 @@ function StartASR () { // 音声認識開始メソッド
         alert("WebSocketサーバーを立ち上げてください");
         return;
     }
+
+    LogMessage("音声認識を開始しました。");
 
     startASR.disabled = "disabled";
     console.log("音声認識開始ボタンを利用不可に設定");
@@ -147,7 +149,10 @@ function StartASR () { // 音声認識開始メソッド
         }
 
         if(event.results[index].isFinal == true){
-            LogMessage(`音声認識結果(完了):${event.results[index][0].transcript}`);
+            LogMessage(`音声認識結果(完了):${asrResultText.textContent}`);
+        }
+        else{
+            LogMessage(`音声認識結果(途中):${asrResultText.textContent}`);
         }
     }
 
@@ -159,6 +164,8 @@ async function StartVolumeMeter () { // 音圧取得メソッド
         alert("WebSocketサーバーを立ち上げてください");
         return;
     }
+
+    LogMessage("音圧取得を開始しました。")
 
     startVolumeMeter.disabled = "disabled";
     if(_audioContext){
@@ -226,5 +233,8 @@ function LogMessage(message){  // ログ追加メソッド
     entry.textContent = `[${time}] ${message}`;
 
     log.appendChild(entry);
-    log.scrollTop = log.scrollHeight; // ログ表示領域の一番下までスクロール
+    
+    requestAnimationFrame(() => {
+        log.scrollTop = log.scrollHeight;
+    });
 }

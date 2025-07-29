@@ -51,7 +51,10 @@ body {
 }
 
 #logBox {
+    display: flex;
+    flex-direction: column;
     width: 60%;
+    height: 400px;
 }
 
 #volumePressureTitle {
@@ -260,10 +263,8 @@ body {
 
 #logHistory{
     border: 1px solid black;
-    height: 93%;
-    width: 100%;
-    box-sizing: border-box;
-    overflow-y: auto;
-    font-size: 14px;
+    font-weight: bold;
     background-color: #a8a2a2;
+    flex: 1;
+    overflow-y: auto;
 }
