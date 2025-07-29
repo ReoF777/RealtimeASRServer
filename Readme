@@ -1,13 +1,13 @@
-# 🎙️ Web Speech ASR App
+# 🎙️ Realtime ASR Server App
 
-![ソフトウェアの概観](./images/overview.png)
+![ソフトウェアの概観](.\images\overview.png)
 
 リアルタイム音声認識とWebSocket通信による音声UIテストアプリです。  
 ブラウザ上で音声を認識し、認識結果をサーバー（または他のアプリ）に送信します。
 
 ---
 
-## 🔧 機能一覧
+## 機能一覧
 
 - ✅ Web Speech APIによるリアルタイム音声認識（Google Chrome推奨）
 - ✅ 認識中のテキスト表示（中間結果対応）
@@ -17,7 +17,7 @@
 
 ---
 
-## 🖼️ 画面構成
+## 画面構成
 
 - 🎤 音量表示
 - 🧠 音声認識結果表示
