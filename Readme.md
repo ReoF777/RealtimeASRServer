@@ -1,6 +1,9 @@
 # Realtime ASR Server App
 
-![ソフトウェアの概観](./images/overview.png)
+<p align="center">
+  <img src="./images/overview.png" alt="ソフトウェアの概観" width="450" />
+</p>
+
 
 リアルタイム音声認識とWebSocket通信による音声UIテストアプリです。  
 ブラウザ上で音声を認識し、認識結果をサーバー（または他のアプリ）に送信します。
